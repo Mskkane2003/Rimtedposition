@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Mon geo</title>
+   <meta charset="utf-8"/>    
+</head>
+<style>
+      *{
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'poppins', sans-serif;
+   font-size: 18px;
+}
+body{
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.container{
+   width: 500px;
+   padding: 30px;
+   border: 1px solid #eeeeee;
+   border-radius: 10px;
+   background-color: #00b3ffc2;
+   border: 1px solid #6e6c6c;
+}
+h1{
+   margin-bottom: 20px;
+   font-size: 30px;
+   color: white;
+}
+p{
+   margin-bottom: 25px;
+   font-size: 21px;
+   color: rgba(255, 255, 255, 0.808);
+}
+input{
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+</style>
+
+<body>
+   <div class="container">
+      <form method="post" action="" name="contact-form">
+         <h1>La géo</h1>
+      <p id="paral">coordonnées ici</p>
+      <input type="button" value="Obtenir coordonnées" onclick="ObtLoc()"/>
+      </form>
+  </div>
+    
+    <script>
+
+      var p = document.getElementById("paral");
+      function ObtLoc(){
+         if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(MaPosition);
+         }else{
+            p.innerHTML = "Navigateur non compatible";
+         }
+
+      }
+      function MaPosition(pos){
+         p.innerHTML = "Latitude;longitude :"+ pos.coords.latitude + pos.coords.longitude;
+      }
+      
+    </script>
+</body>
+
+</html>
