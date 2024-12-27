@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="Google Sheet.css">
+    <style>
+        *{
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+   font-family: 'poppins', sans-serif;
+   font-size: 18px;
+}
+body{
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.container{
+   width: 500px;
+   padding: 30px;
+   border: 1px solid #eeeeee;
+   border-radius: 10px;
+   background-color: #00b3ffc2;
+   border: 1px solid #6e6c6c;
+}
+h4{
+   margin-bottom: 20px;
+   font-size: 30px;
+   color: white;
+}
+h5{
+   margin-bottom: 15px;
+   font-size: 11px;
+   color: rgba(255, 255, 255, 0.808);
+}
+a{
+   margin-bottom: 15px;
+   font-size: 11px;
+   color: rgb(0, 7, 71);
+}
+input{
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+textarea{
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+select{
+   width: 100%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+button{
+   width: 20%;
+   padding: 10px;
+   margin-bottom: 10px;
+   margin-top: -10px;
+   border-radius: 10px;
+   color: white;
+   border: 0px solid #c2bebe;
+   background-color: #77776f;
+}
+#reset{
+   border: none;
+   background-color: #77776f;
+   color: white;
+   width: 100px;
+   margin-top: 10px;
+   border-radius: 10px;
+   border: 1px solid #c2bebe;
+}
+#reset:hover{
+   background-color: #57ebff;
+   color: #000000;
+   box-shadow: 0 0 15px #000000;
+}
+#submit{
+   border: none;
+   background-color: #77776f;
+   color: white;
+   width: 150px;
+   margin-top: 10px;
+   border-radius: 10px;
+   border: 1px solid #c2bebe;
+}
+#submit:hover{
+     background-color: #57ebff;
+   color: #000000;
+   box-shadow: 0 0 15px #000000;
+}
+#input1{
+   width: 67%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+#input2{
+   width: 30%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 10px;
+   border: 0px solid #6e6c6c;
+}
+
+.additional-fields .input1 {
+    width: 49%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 0px solid #6e6c6c;
+}
+
+.additional-fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.loader{
+
+pointer-events: none;
+width: 20px;
+height: 20px;
+border-radius: 100%;
+border: 3px solid transparent;
+border-top-color: #fff;
+animation: an1 1s ease infinite;
+}
+@keyframes an1 {
+0% { 
+   transform: rotate(0turn);
+}
+100%{
+   transform: rotate(1turn);
+}
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="post" action="" name="contact-form">
+            <h4>Commande Resto </h4>
+<h5>Nous vous contacterons après avoir remplit ce formulaire</h5>
+            <input type="text" name="Nom complet" minlength="3" maxlength="15" placeholder="Nom complet" required>
+            <input type="number" name="Num/Téléphone" minlength="8" maxlength="8" onkeypress="return event.charCode>=48 && event.charCode<=57" placeholder="Téléphone" required>
+            
+            <select name="Restaurant" required>
+                <option value="Jet Set">Jet Set</option>
+               </select>
+            <select name="Adresse" required>
+               <option value="" disable selected hidden>Adresse de livraison</option> 
+               <option value="Tevragh zein">Tevragh zein</option>
+               <option value="Cité plage">Cité plage</option>
+               <option value="Arafat">Arafat</option>
+               <option value="Pk">Pk</option>
+               <option value="Dar el beida">Dar el beida</option>
+               <option value="Basra">Basra</option>
+               <option value="Premier">Premier</option>
+               <option value="Carrefour Madrid">Carrefour Madrid</option>
+               <option value="Carrefour BMD">Carrefour BMD</option>
+               <option value="Affarco">Affarco</option>
+               <option value="Autre">Autre</option>
+           </select>
+
+           <textarea name="paral" id="paral" cols="" rows="1" onclick="ObtLoc()" placeholder="Coordonnées ici"></textarea>
+
+            <select name="Mode paiement" required>
+                <option value="" disable selected hidden>Payer par</option>
+                <option value="Bankily">Bankily</option>
+                <option value="Masrvi">Masrvi</option>
+                <option value="Bimbank">Bimbank</option>
+                <option value="Sedad">Sedad</option>
+                <option value="Amanty">Amanty</option>
+                <option value="Click">Click</option>
+                <option value="BCI-Pay">BCI-Pay</option>
+            </select>
+
+            <div class="additional-fields">
+               <select name="Menu" id="input1" required >
+                  <option value="" disable selected hidden>Menu</option>
+               <optgroup label="Fast food" >
+                  <option value="Hamburger / 100 MRU">Hamburger / 100 MRU</option>
+                  <option value="Pizza / 200 MRU">Pizza / 200 MRU</option>
+                  <option value="Tacos / 140 MRU">Tacos / 140 MRU</option>
+                  <option value="Bronchette / 80 MRU">Bronchette / 80 MRU</option>
+                  <option value="Chawarma / 100 MRU">Chawarma / 100 MRU</option>
+                  <option value="Kebab / 80 MRU">Kebab / 80 MRU</option>
+               </optgroup>
+   
+               <optgroup label="Plats Traditionnels" >
+                  <option value="Riz au poisson / 70 MRU">Riz au poisson / 70 MRU</option>
+                  <option value="Maffé / 70 MRU">Maffé / 70 MRU</option>
+                  <option value="Souppou kandjé / 70 MRU">Souppou kandjé / 70 MRU</option>
+                  <option value="Riz à la viande / 80 MRU">Riz à la viande / 80 MRU</option>
+                  <option value="Riz au poulet  / 100 MRU">Riz au poulet  / 100 MRU</option>
+                  <option value="Couscous / 80 MRU">Couscous / 80 MRU</option>
+               </optgroup>
+
+               <optgroup label="Boissons " >
+                  <option value="Coca cola / 30 MRU">Coca cola / 30 MRU</option>
+                  <option value="Sprite / 30 MRU">Sprite / 30 MRU</option>
+                  <option value="Fanta / 35 MRU">Fanta / 35 MRU</option>
+                  <option value="Hawai / 30 MRU">Hawai / 30 MRU</option>
+                  <option value="Pepsi / 30 MRU">Pepsi / 30 MRU</option>
+                  <option value="Kabisa / 30 MRU">Kabisa / 30 MRU</option>
+                  <option value="7up / 30 MRU">7up / 30 MRU</option>
+                  <option value="Fanta orange / 30 MRU">Fanta orange / 30 MRU</option>
+                  <option value="Oasis / 35 MRU">Oasis / 35 MRU</option>
+                  <option value="Coca cola / 35 MRU">Coca cola / 35 MRU</option>
+                  <option value="Guru / 35 MRU">Guru / 35 MRU</option>
+                  <option value="Eau / 10 MRU">Eau / 10 MRU</option>
+               </optgroup>
+
+               </select>
+   
+               <input type="number" name="Qté" id="input2" required min="1" max="100" placeholder="Quantité">
+                    
+            </div>
+            <h5>Pour plus de commandes cliquez sur le button "plus"</h5>
+
+            <button type="button" onclick="addAdditionalFields()" id="button" >Plus</button>
+            <Br></Br>
+         
+            <input type="reset" value="Effacer" id="reset" >
+            <button class="save-btn" id="submit">Envoyer</button>
+        </form>
+    </div>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzGEnIUMuD8kyCfYhMrOo-Gpd0PyVvUOH8gdwAH-8gZHMK_QKnu-lfsO2ViAwtjabqZVw/exec'
+      const form = document.forms['contact-form']
+
+var h1 = document.getElementById("paral");
+
+function ObtLoc(){
+   if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(MaPosition);
+   }else{
+      h1.innerHTML = "Navigateur non compatible";
+   }
+
+}
+function MaPosition(pos){
+   h1.innerHTML = ""+ pos.coords.latitude +"," + pos.coords.longitude;
+}
+
+
+form.addEventListener('submit', e => {
+  e.preventDefault()
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+  .then(response => alert("Merci! Vos réponses ont été envoyé avec succées." ))
+  .then(() => { window.location.reload(); })
+  .catch(error => console.error('Error!', error.message))
+})
+
+    var id=1;
+    var ligne =0;
+    var additionalFields=document.querySelector(".additional-fields");
+
+    function addAdditionalFields() {
+
+      if (ligne!=1) {
+         console.log("OK");
+        element=document.createElement("div");
+        element.innerHTML=`
+        <div class="additional-fields">
+               <select name="Menu 2" id="input1"  >
+                  <option value="" disable selected hidden>Menu 2</option>
+               <optgroup label="Fast food" >
+                  <option value="Hamburger / 100 MRU">Hamburger / 100 MRU</option>
+                  <option value="Pizza / 200 MRU">Pizza / 200 MRU</option>
+                  <option value="Tacos / 140 MRU">Tacos / 140 MRU</option>
+                  <option value="Bronchette / 80 MRU">Bronchette / 80 MRU</option>
+                  <option value="Chawarma / 100 MRU">Chawarma / 100 MRU</option>
+                  <option value="Kebab / 80 MRU">Kebab / 80 MRU</option>
+               </optgroup>
+   
+               <optgroup label="Plats Traditionnels" >
+                  <option value="Riz au poisson / 70 MRU">Riz au poisson / 70 MRU</option>
+                  <option value="Maffé / 70 MRU">Maffé / 70 MRU</option>
+                  <option value="Souppou kandjé / 70 MRU">Souppou kandjé / 70 MRU</option>
+                  <option value="Riz à la viande / 80 MRU">Riz à la viande / 80 MRU</option>
+                  <option value="Riz au poulet  / 100 MRU">Riz au poulet  / 100 MRU</option>
+                  <option value="Couscous / 80 MRU">Couscous / 80 MRU</option>
+               </optgroup>
+
+               <optgroup label="Boissons " >
+                  <option value="Coca cola / 30 MRU">Coca cola / 30 MRU</option>
+                  <option value="Sprite / 30 MRU">Sprite / 30 MRU</option>
+                  <option value="Fanta / 35 MRU">Fanta / 35 MRU</option>
+                  <option value="Hawai / 30 MRU">Hawai / 30 MRU</option>
+                  <option value="Pepsi / 30 MRU">Pepsi / 30 MRU</option>
+                  <option value="Kabisa / 30 MRU">Kabisa / 30 MRU</option>
+                  <option value="7up / 30 MRU">7up / 30 MRU</option>
+                  <option value="Fanta orange / 30 MRU">Fanta orange / 30 MRU</option>
+                  <option value="Oasis / 35 MRU">Oasis / 35 MRU</option>
+                  <option value="Coca cola / 35 MRU">Coca cola / 35 MRU</option>
+                  <option value="Guru / 35 MRU">Guru / 35 MRU</option>
+                  <option value="Eau / 10 MRU">Eau / 10 MRU</option>
+               </optgroup>
+
+               </select>
+   
+               <input type="number" name="Qté 2" id="input2"  min="1" max="100" placeholder="Quantité">
+                    
+            </div>
+         
+            <div class="additional-fields">
+               <select name="Menu 3" id="input1"  >
+                  <option value="" disable selected hidden>Menu 3</option>
+               <optgroup label="Fast food" >
+                  <option value="Hamburger / 100 MRU">Hamburger / 100 MRU</option>
+                  <option value="Pizza / 200 MRU">Pizza / 200 MRU</option>
+                  <option value="Tacos / 140 MRU">Tacos / 140 MRU</option>
+                  <option value="Bronchette / 80 MRU">Bronchette / 80 MRU</option>
+                  <option value="Chawarma / 100 MRU">Chawarma / 100 MRU</option>
+                  <option value="Kebab / 80 MRU">Kebab / 80 MRU</option>
+               </optgroup>
+   
+               <optgroup label="Plats Traditionnels" >
+                  <option value="Riz au poisson / 70 MRU">Riz au poisson / 70 MRU</option>
+                  <option value="Maffé / 70 MRU">Maffé / 70 MRU</option>
+                  <option value="Souppou kandjé / 70 MRU">Souppou kandjé / 70 MRU</option>
+                  <option value="Riz à la viande / 80 MRU">Riz à la viande / 80 MRU</option>
+                  <option value="Riz au poulet  / 100 MRU">Riz au poulet  / 100 MRU</option>
+                  <option value="Couscous / 80 MRU">Couscous / 80 MRU</option>
+               </optgroup>
+
+               <optgroup label="Boissons " >
+                  <option value="Coca cola / 30 MRU">Coca cola / 30 MRU</option>
+                  <option value="Sprite / 30 MRU">Sprite / 30 MRU</option>
+                  <option value="Fanta / 35 MRU">Fanta / 35 MRU</option>
+                  <option value="Hawai / 30 MRU">Hawai / 30 MRU</option>
+                  <option value="Pepsi / 30 MRU">Pepsi / 30 MRU</option>
+                  <option value="Kabisa / 30 MRU">Kabisa / 30 MRU</option>
+                  <option value="7up / 30 MRU">7up / 30 MRU</option>
+                  <option value="Fanta orange / 30 MRU">Fanta orange / 30 MRU</option>
+                  <option value="Oasis / 35 MRU">Oasis / 35 MRU</option>
+                  <option value="Coca cola / 35 MRU">Coca cola / 35 MRU</option>
+                  <option value="Guru / 35 MRU">Guru / 35 MRU</option>
+                  <option value="Eau / 10 MRU">Eau / 10 MRU</option>
+               </optgroup>
+
+               </select>
+   
+               <input type="number" name="Qté 3" id="input2"  min="1" max="100" placeholder="Quantité ">
+                    
+            </div>
+
+            <div class="additional-fields">
+               <select name="Menu 4" id="input1"  >
+                  <option value="" disable selected hidden>Menu 4</option>
+               <optgroup label="Fast food" >
+                  <option value="Hamburger / 100 MRU">Hamburger / 100 MRU</option>
+                  <option value="Pizza / 200 MRU">Pizza / 200 MRU</option>
+                  <option value="Tacos / 140 MRU">Tacos / 140 MRU</option>
+                  <option value="Bronchette / 80 MRU">Bronchette / 80 MRU</option>
+                  <option value="Chawarma / 100 MRU">Chawarma / 100 MRU</option>
+                  <option value="Kebab / 80 MRU">Kebab / 80 MRU</option>
+               </optgroup>
+   
+               <optgroup label="Plats Traditionnels" >
+                  <option value="Riz au poisson / 70 MRU">Riz au poisson / 70 MRU</option>
+                  <option value="Maffé / 70 MRU">Maffé / 70 MRU</option>
+                  <option value="Souppou kandjé / 70 MRU">Souppou kandjé / 70 MRU</option>
+                  <option value="Riz à la viande / 80 MRU">Riz à la viande / 80 MRU</option>
+                  <option value="Riz au poulet  / 100 MRU">Riz au poulet  / 100 MRU</option>
+                  <option value="Couscous / 80 MRU">Couscous / 80 MRU</option>
+               </optgroup>
+
+               <optgroup label="Boissons " >
+                  <option value="Coca cola / 30 MRU">Coca cola / 30 MRU</option>
+                  <option value="Sprite / 30 MRU">Sprite / 30 MRU</option>
+                  <option value="Fanta / 35 MRU">Fanta / 35 MRU</option>
+                  <option value="Hawai / 30 MRU">Hawai / 30 MRU</option>
+                  <option value="Pepsi / 30 MRU">Pepsi / 30 MRU</option>
+                  <option value="Kabisa / 30 MRU">Kabisa / 30 MRU</option>
+                  <option value="7up / 30 MRU">7up / 30 MRU</option>
+                  <option value="Fanta orange / 30 MRU">Fanta orange / 30 MRU</option>
+                  <option value="Oasis / 35 MRU">Oasis / 35 MRU</option>
+                  <option value="Coca cola / 35 MRU">Coca cola / 35 MRU</option>
+                  <option value="Guru / 35 MRU">Guru / 35 MRU</option>
+                  <option value="Eau / 10 MRU">Eau / 10 MRU</option>
+               </optgroup>
+
+               </select>
+   
+               <input type="number" name="Qté 4" id="input2"  min="1" max="100" placeholder="Quantité ">
+                    
+            </div>
+
+            <div class="additional-fields">
+               <select name="Menu 5" id="input1"  >
+                  <option value="" disable selected hidden>Menu 5</option>
+               <optgroup label="Fast food" >
+                  <option value="Hamburger / 100 MRU">Hamburger / 100 MRU</option>
+                  <option value="Pizza / 200 MRU">Pizza / 200 MRU</option>
+                  <option value="Tacos / 140 MRU">Tacos / 140 MRU</option>
+                  <option value="Bronchette / 80 MRU">Bronchette / 80 MRU</option>
+                  <option value="Chawarma / 100 MRU">Chawarma / 100 MRU</option>
+                  <option value="Kebab / 80 MRU">Kebab / 80 MRU</option>
+               </optgroup>
+   
+               <optgroup label="Plats Traditionnels" >
+                  <option value="Riz au poisson / 70 MRU">Riz au poisson / 70 MRU</option>
+                  <option value="Maffé / 70 MRU">Maffé / 70 MRU</option>
+                  <option value="Souppou kandjé / 70 MRU">Souppou kandjé / 70 MRU</option>
+                  <option value="Riz à la viande / 80 MRU">Riz à la viande / 80 MRU</option>
+                  <option value="Riz au poulet  / 100 MRU">Riz au poulet  / 100 MRU</option>
+                  <option value="Couscous / 80 MRU">Couscous / 80 MRU</option>
+               </optgroup>
+
+               <optgroup label="Boissons " >
+                  <option value="Coca cola / 30 MRU">Coca cola / 30 MRU</option>
+                  <option value="Sprite / 30 MRU">Sprite / 30 MRU</option>
+                  <option value="Fanta / 35 MRU">Fanta / 35 MRU</option>
+                  <option value="Hawai / 30 MRU">Hawai / 30 MRU</option>
+                  <option value="Pepsi / 30 MRU">Pepsi / 30 MRU</option>
+                  <option value="Kabisa / 30 MRU">Kabisa / 30 MRU</option>
+                  <option value="7up / 30 MRU">7up / 30 MRU</option>
+                  <option value="Fanta orange / 30 MRU">Fanta orange / 30 MRU</option>
+                  <option value="Oasis / 35 MRU">Oasis / 35 MRU</option>
+                  <option value="Coca cola / 35 MRU">Coca cola / 35 MRU</option>
+                  <option value="Guru / 35 MRU">Guru / 35 MRU</option>
+                  <option value="Eau / 10 MRU">Eau / 10 MRU</option>
+               </optgroup>
+
+               </select>
+   
+               <input type="number" name="Qté 5" id="input2"  min="1" max="100" placeholder="Quantité ">
+                    
+            </div>
+
+        `
+            
+        additionalFields.insertAdjacentElement("afterend",element)
+        ligne++
+
+        //fin if
+      }
+        
+    }
+    save_btn = document.querySelector(".save-btn");
+      save_btn.onclick = function() {
+        this.innerHTML = "<div class='loader'></div>";
+
+        setTimeout(() => {
+            this.innerHTML = "Envoyée !";
+        }, 3000);
+      }
+      
+
+    </script>
+</body>
+
+</html>
+
+
+ 
