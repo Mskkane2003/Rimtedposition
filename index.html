@@ -1,79 +1,78 @@
-<!DOCTYPE html>
+<center>
+    <!DOCTYPE html>
 <html>
 
 <head>
-   <title>Mon geo</title>
-   <meta charset="utf-8"/>    
-</head>
-<style>
-      *{
-   box-sizing: border-box;
-   padding: 0;
-   margin: 0;
-   font-family: 'poppins', sans-serif;
-   font-size: 18px;
+    <link rel="stylesheet" href="Google Sheet.css">
+    <style>
+  span {
+  width: 50px;
+  padding: 5px;
+  font-size:15px;
+  outline: none;
+  border: 1px solid #613bdb;
+  border-radius: 5px;
+  background: #c1c9df;
 }
-body{
-   height: 100vh;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-.container{
-   width: 500px;
-   padding: 30px;
-   border: 1px solid #eeeeee;
-   border-radius: 10px;
-   background-color: #00b3ffc2;
-   border: 1px solid #6e6c6c;
-}
-h1{
-   margin-bottom: 20px;
-   font-size: 30px;
-   color: white;
-}
-p{
-   margin-bottom: 25px;
-   font-size: 21px;
-   color: rgba(255, 255, 255, 0.808);
-}
-input{
-   width: 100%;
+textarea{
+   width: 50%;
    padding: 10px;
    margin-bottom: 10px;
    border-radius: 10px;
-   border: 0px solid #6e6c6c;
+   border: 1px solid #0099ff;
 }
-</style>
+button {
+  height: 32Px;
+  width:50px;
+  color: #fff;
+  background: #66d1ff;
+  border: none;
+  border-radius: 5px;
+  font-weight: 400;
+  margin-top: px;
+  cursor: pointer;
+}
+    </style>
+</head>
 
 <body>
-   <div class="container">
-      <form method="post" action="" name="contact-form">
-         <h1>Position actuelle</h1>
-      <p id="paral">Coordonnées ici</p>
-      <input type="button" value="Obtenir mes coordonnées" onclick="ObtLoc()"/>
-      </form>
-  </div>
-    
+    <textarea name="paral" id="paral" cols="" rows="1" onclick="ObtLoc()" placeholder="Coordonnées ici"></textarea><br>
+    <button onclick="myFunction()">Copier</button>
+
     <script>
+        var h1 = document.getElementById("paral");
 
-      var p = document.getElementById("paral");
-      function ObtLoc(){
-         if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(MaPosition);
-         }else{
-            p.innerHTML = "Navigateur non compatible";
-         }
+function ObtLoc(){
+   if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(MaPosition);
+   }else{
+      h1.innerHTML = "Navigateur non compatible";
+   }
 
-      }
-      function MaPosition(pos){
-         p.innerHTML = "Coordonnées :"+ pos.coords.latitude +"," + pos.coords.longitude;
-      }
-      
+}
+function MaPosition(pos){
+   h1.innerHTML = ""+ pos.coords.latitude +"," + pos.coords.longitude;
+}
+const myFunction = () => {
+            let copyText = document.querySelector("#paral")
+            let range = document.createRange();
+            range.selectNode(copyText)
+
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            try{
+                let successful = document.execCommand('copy')
+                let msg = successful ? 'Copié' : 'Echec de la copie';
+                alert(msg)
+            } catch(err){
+                alert('Erreur !!')
+            }
+
+            window.getSelection().removeAllRanges();
+        }
     </script>
 </body>
 
 </html>
-
-
- 
+    </center>
