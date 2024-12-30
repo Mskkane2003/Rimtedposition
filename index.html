@@ -5,40 +5,40 @@
 <head>
     <link rel="stylesheet" href="Google Sheet.css">
     <style>
-  span {
-  width: 50px;
-  padding: 5px;
-  font-size:15px;
-  outline: none;
-  border: 1px solid #613bdb;
-  border-radius: 5px;
-  background: #c1c9df;
+        *{
+   box-sizing: border-box 10px;
+   padding: 10px;
+   margin: 10px;
+   font-family: 'poppins', sans-serif;
+   font-size: 30px;
 }
 textarea{
-   width: 50%;
-   padding: 10px;
+   width: 80%;
+   padding: 2vmax;
    margin-bottom: 10px;
    border-radius: 10px;
    border: 1px solid #0099ff;
 }
 button {
-  height: 32Px;
-  width:50px;
+  height: 80px;
+  width: 150px;
   color: #fff;
-  background: #66d1ff;
-  border: none;
+  background: #00b3ff;
+  border: none;  
   border-radius: 5px;
   font-weight: 400;
-  margin-top: px;
+  margin-top: 10px;
   cursor: pointer;
 }
     </style>
 </head>
 
 <body>
-    <textarea name="paral" id="paral" cols="" rows="1" onclick="ObtLoc()" placeholder="Coordonnées ici"></textarea><br>
-    <button onclick="myFunction()">Copier</button>
-
+    <div>
+        <textarea name="paral" id="paral" cols="" rows="1" onclick="ObtLoc()" placeholder="Coordonnées ici"></textarea><br>
+        <button onclick="myFunction()">Copier</button>  
+    </div>
+    
     <script>
         var h1 = document.getElementById("paral");
 
